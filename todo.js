@@ -30,6 +30,7 @@ const writetoFile = () => {
 };
 
 const readfromFile = () => {
+    checkIfExists();
     fs.readFile("db.json", (err, data) => {
         if (data) {
             if (data.toString() !== "") {
@@ -115,8 +116,8 @@ const caseSituation = (choice, title, newtitle) => {
 };
 
 const main = () => {
-    var input = process.argv.splice(2);
-    if (input[0] === "-h") {
+    var inputArgs = process.argv.splice(2);
+    if (inputArgs[0] === "-h") {
         status = 0;
         console.log("--------------------------");
         console.log("Hello Welcome to To-do!!!");
@@ -129,12 +130,12 @@ const main = () => {
         console.log("4. Show To-Do list \n  Syntax: node <filename> 4");
         console.log("Note : For space strings use quotation ");
     } else {
-        var caseChoice = Number(input[0]);
-        caseSituation(caseChoice, input[1], input[2]);
+        var caseChoice = Number(inputArgs[0]);
+        caseSituation(caseChoice, inputArgs[1], inputArgs[2]);
     }
 };
 
-checkIfExists();
+
 readfromFile();
 setTimeout(main, 100);
 setTimeout(writetoFile, 200);
